@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch --import ./src/instrument.ts src/index.ts",
     "build": "tsc",
-    "start": "node --import ./src/instrument.ts dist/index.js",  
+    "start": "node --import ./src/instrument.ts dist/index.js",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx scripts/seed.ts"
   },
@@ -30,6 +30,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^22.10.10",
     "@types/pg": "^8.11.10",
