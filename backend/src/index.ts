@@ -10,22 +10,9 @@ import { clerkWebhookHandler } from './webhooks/clerk';
 import { getEnv } from './lib/env';
 import keepAliveCron from './lib/cron';
 
-/*process.on('uncaughtException', (err) => {
-  console.error('Uncaught exception:', err);
-});
-
-process.on('unhandledRejection', (reason) => {
-  console.error('Unhandled rejection:', reason);
-});
-
-// const env = getEnv();
-let env: ReturnType<typeof getEnv>;
-try {
-  env = getEnv();
-} catch (err) {
-  console.error('❌ Failed to load env:', err);
-  process.exit(1);
-}*/
+import meRouter from "./routes/meRouter";
+import productsRouter from "./routes/productRouter";
+import streamRouter from "./routes/streamRouter";
 
 const env = getEnv();
 const app = express();
@@ -45,6 +32,10 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
+app.use("/api/me", meRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/stream", streamRouter);
+
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
@@ -63,6 +54,8 @@ if (fs.existsSync(publicDir)) {
     res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
   });
 }
+
+// todo: add error handling middleware
 
 app.listen(env.PORT, "0.0.0.0", () => {
   console.log("Listening on port:", env.PORT);
