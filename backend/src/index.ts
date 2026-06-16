@@ -8,8 +8,9 @@ import path from "node:path";
 import { clerkMiddleware } from '@clerk/express';
 import { clerkWebhookHandler } from './webhooks/clerk';
 import { getEnv } from './lib/env';
+import keepAliveCron from './lib/cron';
 
-process.on('uncaughtException', (err) => {
+/*process.on('uncaughtException', (err) => {
   console.error('Uncaught exception:', err);
 });
 
@@ -24,13 +25,14 @@ try {
 } catch (err) {
   console.error('❌ Failed to load env:', err);
   process.exit(1);
-}
+}*/
 
+const env = getEnv();
 const app = express();
-app.get('/health', (_req, res) => res.sendStatus(200));
 
 const rawJson = express.raw({ type: 'application/json', limit: '10mb' });
 
+// it's important that you don't parse the webhook event data, it should be in the raw format
 app.post('/webhooks/clerk', rawJson, (req, res) => {
   void  clerkWebhookHandler(req, res);
 });
@@ -39,25 +41,34 @@ app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
 
-const publicDir = path.join(__dirname, '..', 'public');
-console.log('publicDir:', publicDir);
-console.log('publicDir exists:', fs.existsSync(publicDir));
-console.log('index.html exists:', fs.existsSync(path.join(publicDir, 'index.html')));
+app.get("/health", (_req, res) => {
+  res.json({ ok: true });
+});
+
+const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
 
-  app.get('/*splat', (req, res, next) => {
-    if (req.path.startsWith('/api') || req.path.startsWith('/webhooks')) {
+  app.get("/{*any}", (req, res, next) => {
+    if (req.method !== "GET" && req.method !== "HEAD") {
       next();
       return;
     }
-    res.sendFile(path.join(publicDir, 'index.html'));
+
+    if (req.path.startsWith("/api") || req.path.startsWith("/webhooks")) {
+      next();
+      return;
+    }
+
+    res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
   });
 }
 
-const server = app.listen(env.PORT, "0.0.0.0", () => {
-  console.log('listening on port:', env.PORT);
+app.listen(env.PORT, "0.0.0.0", () => {
+  console.log("Listening on port:", env.PORT);
+  if (env.NODE_ENV === "production") {
+    keepAliveCron.start();
+    console.log("Keep-alive cron job started");
+  }
 });
 
-server.keepAliveTimeout = 120000;
-server.headersTimeout = 120000;
