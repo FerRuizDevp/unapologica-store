@@ -18,7 +18,7 @@ const envSchema = z.object({
   // check if it's a valid url, if not throw an error, but default to the production polar api base url
   POLAR_API_BASE: z.string().url().default("https://api.polar.sh"),
   // todo: fix this later to be uuid or something, for now just a string
-  POLAR_CHECKOUT_PRODUCT_ID: z.string(),
+  POLAR_CHECKOUT_PRODUCT_ID: z.string().uuid(),
 
   STREAM_API_KEY: z.string().min(1),
   STREAM_API_SECRET: z.string().min(1),

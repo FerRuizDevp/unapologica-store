@@ -7,7 +7,7 @@ export type UserRole = "customer" | "support" | "admin";
 export type CheckoutSessionLine = {
     productId: string;
     quantity: number;
-    unitPriceCenter: number;
+    unitPriceCents: number;
 };
 
 

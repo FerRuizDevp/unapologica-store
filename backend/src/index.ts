@@ -13,6 +13,7 @@ import keepAliveCron from './lib/cron';
 import meRouter from "./routes/meRouter";
 import productsRouter from "./routes/productRouter";
 import streamRouter from "./routes/streamRouter";
+import checkoutRouter from "./routes/checkoutRouter";
 
 const env = getEnv();
 const app = express();
@@ -23,6 +24,11 @@ const rawJson = express.raw({ type: 'application/json', limit: '10mb' });
 app.post('/webhooks/clerk', rawJson, (req, res) => {
   void  clerkWebhookHandler(req, res);
 });
+/*
+app.post('/webhooks/polar', rawJson, (req, res) => {
+  void  polarWebhookHandler(req, res);
+});
+*/
 
 app.use(express.json());
 app.use(cors());
@@ -35,6 +41,7 @@ app.get("/health", (_req, res) => {
 app.use("/api/me", meRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/stream", streamRouter);
+app.use("/api/checkout", checkoutRouter);
 
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
