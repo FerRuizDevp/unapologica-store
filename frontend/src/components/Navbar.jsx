@@ -1,5 +1,4 @@
-import React from "react";
-import { Show, useAuth, SignInButton, UserButton } from "@clerk/react";
+import { Show, SignInButton, useAuth, UserButton } from "@clerk/react";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "../lib/api";
 import { Link } from "react-router";
@@ -13,7 +12,9 @@ import {
   StoreIcon,
 } from "lucide-react";
 
-function Navbar() {
+import { useCart } from "../store/cart";
+
+const Navbar = () => {
   const { getToken, isSignedIn } = useAuth();
 
   const { data: meData } = useQuery({
@@ -24,14 +25,13 @@ function Navbar() {
 
   const role = meData?.user?.role;
 
-  /*const cartCount = useCart((s) =>
+  const cartCount = useCart((s) =>
     s.items.reduce((n, line) => n + line.quantity, 0),
-  );*/
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/95 shadow-sm backdrop-blur-md">
       <div className="navbar mx-auto min-h-14 max-w-7xl px-4 py-2.5 md:px-6 md:py-3">
-        {/* LOGO */}
         <div className="flex-1">
           <Link
             to="/"
@@ -46,13 +46,13 @@ function Navbar() {
 
         <nav className="flex items-center gap-1 md:gap-1.5">
           <Link to="/" className="btn btn-ghost gap-2 font-medium">
-            <StoreIcon className="size-6 opacity-90" aria-hidden />
+            <ShoppingBagIcon className="size-6 opacity-90" aria-hidden />
             <span className="hidden sm:inline">Shop</span>
           </Link>
 
           <Show when={"signed-in"}>
             <Link to="/orders" className="btn btn-ghost gap-2 font-medium">
-              <ShoppingCartIcon className="size-6 opacity-90" aria-hidden />
+              <PackageIcon className="size-6 opacity-90" aria-hidden />
               <span className="hidden sm:inline">Orders</span>
             </Link>
 
@@ -67,7 +67,7 @@ function Navbar() {
             ) : null}
           </Show>
 
-          {/*<Link
+          <Link
             to="/cart"
             className="btn btn-ghost gap-2 font-medium indicator"
             aria-label={cartCount > 0 ? `Cart, ${cartCount} items` : "Cart"}
@@ -79,7 +79,7 @@ function Navbar() {
             ) : null}
             <ShoppingCartIcon className="size-6 opacity-90" aria-hidden />
             <span className="hidden sm:inline">Cart</span>
-          </Link>*/}
+          </Link>
 
           <Show when={"signed-out"}>
             <SignInButton mode="modal">
@@ -111,6 +111,6 @@ function Navbar() {
       </div>
     </header>
   );
-}
+};
 
 export default Navbar;
