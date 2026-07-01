@@ -1,6 +1,8 @@
 import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 import PageLoader from "./components/PageLoader.jsx";
 import Layout from "./components/Layout.jsx";
+import { Routes, Route } from "react-router";
+import HomePage from "./pages/HomePage.jsx";
 
 function App() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -9,16 +11,9 @@ function App() {
 
   return (
     <Layout>
-      <header>
-        {!isSignedIn ? (
-          <>
-            <SignInButton mode="modal" />
-            <SignUpButton mode="modal" />
-          </>
-        ) : (
-          <UserButton />
-        )}
-      </header>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     </Layout>
   );
 }
