@@ -1,5 +1,5 @@
 import React from "react";
-import { useHomeCatalog } from "../hooks/useHomeCatalog.jsx";
+import { useHomeCatalog } from "../hooks/useHomeCatalog.js";
 import { HomeHero } from "../components/HomeHero.jsx";
 import { TrustStrip } from "../components/TrustStrip.jsx";
 import { PageError } from "../components/PageError.jsx";
