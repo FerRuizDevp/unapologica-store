@@ -89,7 +89,8 @@ export async function polarWebhookHandler(req: Request, res: Response) {
     }
 
     const raw = req.body instanceof Buffer ? req.body : Buffer.from(String(req.body));
-    const wh = new Webhook(Buffer.from(env.POLAR_WEBHOOK_SECRET, "utf8").toString("base64"));
+    const encodedSecret = "whsec_" + Buffer.from(env.POLAR_WEBHOOK_SECRET, "utf8").toString("base64");
+    const wh = new Webhook(encodedSecret);
 
     const id = headerString(req.headers, "webhook-id");
     const ts = headerString(req.headers, "webhook-timestamp");
