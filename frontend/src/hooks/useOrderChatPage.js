@@ -19,7 +19,7 @@ export function useOrderChatPage() {
     enabled: isSignedIn,
   });
 
-  const role = meData?.user?.role;
+  const role = meData?.role;
 
   const inviteMutation = useMutation({
     mutationFn: () =>
