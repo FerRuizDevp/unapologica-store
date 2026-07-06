@@ -23,7 +23,7 @@ const Navbar = () => {
     enabled: isSignedIn,
   });
 
-  const role = meData?.user?.role;
+  const role = meData?.role;
 
   const cartCount = useCart((s) =>
     s.items.reduce((n, line) => n + line.quantity, 0),

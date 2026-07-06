@@ -45,7 +45,10 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.use("/api/me", meRouter);
+app.use("/api/me", (_req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+}, meRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/stream", streamRouter);
 app.use("/api/checkout", checkoutRouter);
