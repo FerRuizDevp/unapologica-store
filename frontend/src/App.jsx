@@ -12,6 +12,7 @@ import OrderDetailSummaryPage from "./pages/OrderDetailSummaryPage.jsx";
 import OrderChatPage from "./pages/OrderChatPage.jsx";
 import SentryDemoPage from "./pages/SentryDemoPage.jsx";
 import OrderVideoPage from "./pages/OrderVideoPage.jsx";
+import AdminProductsPage from "./pages/AdminProductsPage.jsx";
 
 function App() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -36,6 +37,13 @@ function App() {
           path="/orders/:id/call"
           element={
             isSignedIn ? <OrderVideoPage /> : <Navigate to={"/"} replace />
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            isSignedIn ? <AdminProductsPage /> : <Navigate to={"/"} replace />
           }
         />
 
