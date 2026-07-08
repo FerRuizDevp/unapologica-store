@@ -3,8 +3,8 @@
 A full-stack e-commerce clothing store built with a modern SaaS architecture. Features real-time customer support chat, video calling, secure payments, and a full admin dashboard — all deployed and production-ready.
 
 ## Preview
-https://github.com/user-attachments/assets/67b382c8-b3e3-432c-bb3a-e3f9f271655d
-https://github.com/user-attachments/assets/db4fd070-210a-41f5-92bc-f2a664d53f5d
+![unapologica-store-1](https://github.com/user-attachments/assets/67b382c8-b3e3-432c-bb3a-e3f9f271655d)
+![unapologica-store-2](https://github.com/user-attachments/assets/db4fd070-210a-41f5-92bc-f2a664d53f5d)
 
 🔗 **Live Demo:** [unapologica-store.onrender.com](https://unapologica-store.onrender.com/)
 
