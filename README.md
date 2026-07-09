@@ -2,10 +2,10 @@
 {
   "title": "Unapologica Store (Full-Stack E-Commerce App)",
   "description": "A full-stack e-commerce clothing store with real-time chat, video calling, secure payments, and an admin dashboard. Built with React, Node.js, TypeScript, and PostgreSQL.",
-  "imagePreview": "https://github.com/user-attachments/assets/67b382c8-b3e3-432c-bb3a-e3f9f271655d",
+  "imagePreview": "https://github.com/user-attachments/assets/db4fd070-210a-41f5-92bc-f2a664d53f5d",
   "githubLink": "https://github.com/FerRuizDevp/unapologica-store",
   "liveLink": "https://unapologica-store.onrender.com/",
-  "tags": ["all-projects", "best-one", "React", "TypeScript", "Node.js", "PostgreSQL", "TanStack-Query", "Tailwind", "Clerk", "Polar", "Stream", "full-stack", "e-commerce"]
+  "tags": ["all-projects", "best-one", "React", "TypeScript", "Node.js", "PostgreSQL", "TanStack-Query", "Tailwind", "Clerk", "Polar", "Stream"]
 }
 -->
 
