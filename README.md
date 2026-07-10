@@ -5,7 +5,7 @@
   "imagePreview": "https://github.com/user-attachments/assets/db4fd070-210a-41f5-92bc-f2a664d53f5d",
   "githubLink": "https://github.com/FerRuizDevp/unapologica-store",
   "liveLink": "https://unapologica-store.onrender.com/",
-  "tags": ["all-projects", "best-one", "React", "Typescript", "Nodejs", "PostgreSQL", "TanStackQuery", "Tailwind", "Clerk", "Polar", "Stream"]
+  "tags": ["all-projects", "best-one", "React", "Typescript", "Nodejs", "PostgreSQL", "Tailwind"]
 }
 -->
 
